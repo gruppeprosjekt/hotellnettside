@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Innsjekk</title>
+    <link rel="stylesheet" href="innsjekk.css">
+</head>
+<body>
+<ul>
+    <li><a href="index.html">Hjem</a></li>
+    <li><a href="politikere.html">Politikere</a></li>
+    <li><a href="registrere.html">Registrering</a></li>
+    <li><a href="check.html">Sjekkliste</a></li>
+    <li><a href="refleksjon.html">Refleksjon</a></li>
+</ul>
+<div id="hoved">
+
+    <h1>INNSJEKK</h1>
+    <div>
+        <p>
+            Tekst ...
+        </p>
+    </div>
+
+
+    <div id="parti">
+        <div class="bestilling">
+            <h3>Bestill rom hos oss!</h3>
+            <p> Om du skal sove hos oss kan du velge mellom suite og standard rom. Det finnes suite i alle
+            størrelser/hvor mange som skal sove der. Suite innebærer enten havutsikt eller rom med basseng.</p>
+            <div class="checkboxradio">
+                <p>Velg type rom:</p>
+                <label>
+                    <input type="radio" name="antallPersoner" value="1-2" id="standard"> Standard
+                </label>
+                <label>
+                    <input type="radio" name="antallPersoner" value="1-2" id="suite" checked> Suite
+                </label>
+            </div>
+            <label for="matkasse">Antall personer</label>
+            <input type="text" list="mat" id="matkasse">
+            <datalist id="mat">
+                <option value="1 pers">
+                <option value="2 pers">
+                <option value="3 pers">
+                <option value="4 pers">
+                <option value="5 pers">
+                <option value="Familierom">
+                <option value="6 pers">
+            </datalist>
+            <p id="resultat"></p>
+            <h3>Fyll inn!</h3>
+            <label for="fornavn">Fornavn</label>
+            <input type="text" id="fornavn">
+            <label for="etternavn">Etternavn</label>
+            <input type="text" id="etternavn">
+            <label for="gate">Land</label>
+            <input type="text" id="gate">
+            <label for="postnummer">By</label>
+            <input type="text" id="postnummer">
+            <label for="sted">Sted</label>
+            <input type="text" id="sted">
+            <label for="telefonnummer">Telefonnummer</label>
+            <input type="text" id="telefonnummer">
+            <br> <br/>
+            <button>Sjekk inn!</button>
+        </div>
+        <div class="oppsummering">
+            <h3>Registreringsinformasjon</h3>
+            <p id=typemat> </p>
+            <p id=antallP> </p>
+            <h3 id="levering"></h3>
+            <p id="fornavn2"> </p>
+            <p id="etternavn2"> </p>
+            <p id="gate2"> </p>
+            <p id="postnummer2"> </p>
+            <p id="sted2"> </p>
+            <p id="telefonnummer2"> </p>
+            <br>
+            <p id="sum">  </p>
+            <br>
+            <button id="slett">Fyll inn på nytt</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Henter elementer
+    let matkasseEl = document.querySelector("#matkasse");
+    let resultatEl = document.querySelector("#resultat");
+    // Legger til en lytter
+    matkasseEl.addEventListener("input", skrivResultat);
+    //definerer variabel som skal brukes i en funksjon
+    var sum=0;
+    var personerValgt;
+    //funksjonen kjøres når matkasse velges
+    function skrivResultat() {
+        // Finner verdien til <input>-elementet
+        let matboks = matkasseEl.value;
+        //gir beskjed til bruker hva man har valgt
+        resultatEl.innerHTML = "Du har valgt " + matboks + ".";
+        //Sjekker om allin er huket av
+        personerValgt=document.getElementById("suite").checked
+        //if testen finner riktig pris basert på kasse og antall personer
+        if(matboks==="1 pers" || matboks=== "2 pers"||matboks==="3 pers" ) {
+            if (personerValgt) {
+                sum=979
+            }
+            else sum=679
+        }
+
+        if(matboks==="4 pers" || matboks==="5 pers") {
+            if (personerValgt) {
+                sum=1179
+            }
+            else sum=879
+        }
+
+        if(matboks==="familierom") {
+            if (personerValgt) {
+                sum=1079
+            }
+            else sum=779
+        }
+    }
+
+    // Henter HTML-elementer
+    let knappEl = document.querySelector("button");
+    let knapp2El = document.querySelector("#slett");
+    //lager en assosiativ array (array som består av egenskaper). Brukes senere til å lagre i LocalStorage.
+    let persondata={}
+
+
+    //Gjør om persondata til JSON format og lagrer i LocalStorage
+    persondata=JSON.parse(localStorage.getItem("person"))
+    if (persondata!==null) {
+        document.querySelector("#typemat").innerHTML="Antall gjester: "+ persondata.matkasse
+        document.querySelector("#levering").innerHTML= "Levering"
+        document.querySelector("#fornavn2").innerHTML= "Fornavn: " + persondata.fornavn
+        document.querySelector("#etternavn2").innerHTML= "Etternavn: " + persondata.etternavn
+        document.querySelector("#gate2").innerHTML= "Land: " + persondata.gate
+        document.querySelector("#postnummer2").innerHTML= "By: " + persondata.postnummer
+        document.querySelector("#sted2").innerHTML= "Sted: " + persondata.sted
+        document.querySelector("#telefonnummer2").innerHTML= "Telefonnummer: " + persondata.telefonnummer
+        document.querySelector("#sum").innerHTML= "Å betale for rommet: " + persondata.sum + " kr per natt" +  "Takk for du vil besøke vårt hotell! Har du fylt inn riktig informasjon? Hvis nei kan du trykke  slett lagret valg."
+        document.querySelector("#antallP").innerHTML= "Type rom: " + persondata.antallP
+    }
+    // Legger til lytter på knappene
+    knappEl.addEventListener("click", registrere);
+    knapp2El.addEventListener("click", slette);
+    function registrere() {
+        //henter opp eldre funksjon for å oppdatere
+        skrivResultat()
+        let antallP;
+        if (personerValgt){
+            antallP="allin"
+        }
+        else antallP="ordinar"
+        //Henter verdier og lagrer i variabler
+        let matkasse=document.querySelector("#matkasse").value;
+        let fornavn=document.querySelector("#fornavn").value;
+        let etternavn=document.querySelector("#etternavn").value;
+        let gate=document.querySelector("#gate").value;
+        let postnummer=document.querySelector("#postnummer").value;
+        let sted=document.querySelector("#sted").value;
+        let telefonnummer=document.querySelector("#telefonnummer").value;
+        //gir innhold til arrayen
+        persondata={matkasse:matkasse, fornavn:fornavn, etternavn:etternavn, gate:gate, postnummer:postnummer, sted:sted, telefonnummer:telefonnummer, antallP:antallP, sum:sum}
+        //lagrer i LocalStorage
+        localStorage.setItem("person",JSON.stringify(persondata))
+        //reloader siden med en gang knappen blir trykket.
+        window.location="http://localhost:63342/IT1-HTML/gruppeoppg/innsjekk.html"    }
+    function slette() {
+        localStorage.removeItem("person")
+        //sletter informasjonskapsler og oppdaterer vinduet
+        window.location="http://localhost:63342/IT1-HTML/gruppeoppg/innsjekk.html"   }
+</script>
+
+
+</body>
+</html>
