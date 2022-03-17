@@ -125,3 +125,8 @@ li a:hover {
     from {opacity: .4}
     to {opacity: 1}
 }
+#hoved{
+    width: 60%;
+    margin: 20px auto;
+    height: 300px;
+}
