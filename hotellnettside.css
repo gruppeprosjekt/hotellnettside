@@ -133,3 +133,7 @@ li a:hover {
 label{background-color: rgba(198, 198, 198, 0.45);
     
 }
+img{
+    width: 100%;
+    height: 500px;
+}
