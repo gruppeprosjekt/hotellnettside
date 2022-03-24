@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Mine Rom </title>
+    <link rel="stylesheet" href="hotellnettside.css">
+</head>
+<body>
+<ul id="navigasjonsbar">
+    <li><a href="index.html"> HJEM </a></li>
+    <li><a href=innsjekk.html> BESTILL ROM </a></li>
+    <li><a href=#> ANMELDELSER </a></li>
+    <li><a href=minerom.html> MINE ROM </a></li>
+</ul>
+
+<div class="textbox">
+    <h1> Mine Rom </h1>
+    <div id="liste">
+    </div>
+</div>
+
+<script>
+    //henter ut elementene
+    let listeEl = document.getElementById("liste");
+
+    //skriver ut bestillinger
+    if (Number(localStorage.getItem("antallRom")) > 0) {
+        for (let i = 1; i <= Number(localStorage.getItem("antallRom")); i++) {
+            let ulEl = document.createElement("ul");
+            let varBestilling = "bestilling" + i.toString();
+            let liH = document.createElement("h4");
+            let liHContent = document.createTextNode("Bestilling nr. " + i.toString());
+            liH.appendChild(liHContent);
+            listeEl.appendChild(liH);
+            let liNavn = document.createElement("li");
+            let liNavnContent = document.createTextNode("Navn: " + JSON.parse(localStorage.getItem(varBestilling)).fornavn + " " + JSON.parse(localStorage.getItem(varBestilling)).etternavn);
+            liNavn.appendChild(liNavnContent);
+            ulEl.appendChild(liNavn);
+            let liSted = document.createElement("li");
+            let liStedContent = document.createTextNode("Sted: " + JSON.parse(localStorage.getItem(varBestilling)).postnummer + ", " + JSON.parse(localStorage.getItem(varBestilling)).gate);
+            liSted.appendChild(liStedContent);
+            ulEl.appendChild(liSted);
+            let liTlf = document.createElement("li");
+            let liTlfContent = document.createTextNode("Telefonnummer: " + JSON.parse(localStorage.getItem(varBestilling)).telefonnummer);
+            liTlf.appendChild(liTlfContent);
+            ulEl.appendChild(liTlf);
+            let liRom = document.createElement("li");
+            //gir variablene for antallP nye verdier
+            let romType;
+            if (JSON.parse(localStorage.getItem(varBestilling)).antallP === "allin") {
+                romType = "Suite";
+            } else {
+                romType = "Standard";
+            }
+            let liRomContent = document.createTextNode("Romtype: " + JSON.parse(localStorage.getItem(varBestilling)).matkasse + " " + romType);
+            liRom.appendChild(liRomContent);
+            ulEl.appendChild(liRom);
+            listeEl.appendChild(ulEl);
+        }
+    } else {
+        let pEl = document.createElement("p");
+        pEl.innerHTML = "Du har ingen bestillinger ennå.";
+        listeEl.appendChild(pEl);
+    }
+
+</script>
+</body>
+</html>
