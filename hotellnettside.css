@@ -83,37 +83,6 @@ span.price {
         margin-bottom: 20px;
     }
 }
-#navigasjonsbar {
-      list-style-type : none;
-      overflow : hidden;
-      background-color : grey ;
-      padding :  0;
-      margin : 0;
-      width:  100% ;
-  }
-li {
-    float : left;
-    font-family : Bahnschrift , sans-serif;
-}
-li  a {
-    display: block;
-    color:  #EEEEEE ;
-    text-align: center;
-    padding: 21px  24px ;
-    text-decoration: none;
-}
-li  a :hover {
-    background-color: grey;
-}
-
-
-.tekstboks {
-    width :  60% ;
-    /* kantlinje: 5px helt svart; */
-    margin-top :  10px ;
-    background-color : lightgrey;
-    text-align : justify;
-}
 
 
 
@@ -267,16 +236,9 @@ img{
 
 .textbox {
     width: 60%;
-    padding: 10%;
+    padding: 3%;
     margin: auto;
     margin-top: 10px;
     background-color: lightgray;
     text-align: justify;
-}
-
-#liste {
-    list-style-type: none;
-    display: block;
-    float: none;
-    overflow: hidden;
 }
