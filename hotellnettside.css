@@ -6,31 +6,38 @@
     margin:0;
     width: 100%;
 }
-li {
+#navigasjonsbar > li {
     float: left;
     font-family: Bahnschrift, sans-serif;
 }
-li a {
+#navigasjonsbar > li a {
     display: block;
     color: #EEEEEE;
     text-align: center;
     padding: 21px 24px;
     text-decoration: none;
 }
-li a:hover {
+#navigasjonsbar > li a:hover {
     background-color: dimgray;
 }
 
-
 .textbox {
     width: 60%;
-    /* border: 5px solid black; */
     padding: 3%;
     margin: auto;
     margin-top: 10px;
     background-color: lightgray;
     text-align: justify;
 }
+
+#liste {
+    list-style-type: none;
+    display: block;
+    float: none;
+    overflow: hidden;
+
+
+
 * {box-sizing:border-box}
 
 /* Slideshow container */
