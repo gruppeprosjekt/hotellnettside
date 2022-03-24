@@ -6,19 +6,18 @@
     <link rel="stylesheet" href="hotellnettside.css">
 </head>
 <body>
-<img src="bilder/hotellrom.jpg">
-<ul  id ="navigasjonsbar" >
-    <li> <a href ="index.html"> HJEM </a> </li>
-    <li> <a href ="insjekk.html"> BESTILL ROM </a> </li>
-    <li> <a href ="anmeldelser.html"> ANMELDELSER </a> </li>
-    <li> <a href ="minerom.html"> MIN ROM </a> </li>
+<ul id="navigasjonsbar">
+    <li><a href="index.html"> HJEM </a></li>
+    <li><a href=innsjekk.html> BESTILL ROM </a></li>
+    <li><a href=#> ANMELDELSER </a></li>
+    <li><a href=minerom.html> MINE ROM </a></li>
 </ul>
 <div id="hoved">
 
     <h1>INNSJEKK</h1>
     <div>
         <p>
-            Velkommen til vårt hotell! 
+            Tekst ...
         </p>
     </div>
 
@@ -124,7 +123,6 @@
 
     // Henter HTML-elementer
     let knappEl = document.querySelector("button");
-    let knapp2El = document.querySelector("#slett");
     //lager en assosiativ array (array som består av egenskaper). Brukes senere til å lagre i LocalStorage.
     let persondata={}
 
@@ -170,11 +168,12 @@
             antallP:antallP,
             sum:sum
         };
+        //legger til brukers registrering i localStorage
+        leggTilMineSider();
+
         //reloader siden med en gang knappen blir trykket.
         //window.location="http://localhost:63342/IT1-HTML/gruppeoppg/innsjekk.html";
 
-        //legger til brukers registrering i localStorage
-        leggTilMineSider();
     }
 
     //funksjon som legger til brukers registrering i localStorage
